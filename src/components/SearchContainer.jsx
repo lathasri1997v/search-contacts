@@ -1,7 +1,7 @@
 import React, { useState }from 'react';
 import "./SearchContainer.css";
 
-const SearchContainer = ({ onSearch }) => {
+export const SearchContainer = ({ onSearch }) => {
     const [filters, setFilters] = useState ({
         firstName: "",
         lastName: "",
@@ -20,39 +20,50 @@ const SearchContainer = ({ onSearch }) => {
     
       const handleSearchClick = () => {
         onSearch(filters);
+        if (!filters.lastName.trim()) {
+            alert("Last Name is required.");
+            return;
+          }
       };
     
       return (
-        <div className="search-bar-container">
+        <div className="search-bar">
            <div className='container1'>
                 <input
                     name="firstName"
                     placeholder="First Name"
+                    value={filters.firstName}
                     onChange={handleInputChange}
                 />
                 <input
+                    type="text"
                     name="lastName"
-                    placeholder="Last Name"
-                    onChange={handleInputChange}
+                    placeholder="Last Name *"
                     required
+                    value={filters.lastName}
+                    onChange={handleInputChange}
                 />
                 <input
-                    name="dob"
                     type="date"
-                    placeholder="DOB"
+                    name="dob"
+                    placeholder="Date of Birth"
+                    value={filters.dob}
                     onChange={handleInputChange}
                 />
                 <input
+                    type="email"
                     name="email"
-                    placeholder="Email"
+                    placeholder="Email Address"
+                    value={filters.email}
                     onChange={handleInputChange}
                 />
                 <input
+                    type="text"
                     name="phone"
-                    placeholder="Phone"
+                    placeholder="Phone Number"
+                    value={filters.phone}
                     onChange={handleInputChange}
                 />
-                <button onClick={handleSearchClick}>Search</button>
            </div>
           <div className='container2'>
                 <input
@@ -69,13 +80,23 @@ const SearchContainer = ({ onSearch }) => {
                     value={filters.city}
                     onChange={handleInputChange}
                 />
-                <input
+                <select
                     type="text"
                     name="state"
                     placeholder="State"
                     value={filters.state}
-                    onChange={handleInputChange}
-                />
+                    onChange={handleInputChange}>
+                        <option value="">Select State</option>
+                        <option value="Alberta">Alberta</option>
+                        <option value="British Columbia">British Columbia</option>
+                        <option value="Manitoba">Manitoba</option>
+                        <option value="New Brunswick">New Brunswick</option>
+                        <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                        <option value="Nova Scotia">Nova Scotia</option>
+                        <option value="Ontario">Ontario</option>
+                        <option value="Quebec">Quebec</option>
+                        <option value="Saskatchewan">Saskatchewan</option>
+                </select>
                 <input
                     type="text"
                     name="zipCode"
@@ -84,6 +105,7 @@ const SearchContainer = ({ onSearch }) => {
                     onChange={handleInputChange}
                 />
           </div>
+          <button onClick={handleSearchClick}>Search</button>
         </div>
       );
     };

@@ -1,0 +1,23 @@
+.results-list table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  overflow-x: auto;
+  display: block;
+}
+
+.results-list th, .results-list td {
+  padding: 10px;
+  text-align: left;
+}
+
+.results-list th {
+  background-color: #f4f4f4;
+}
+
+@media (max-width: 768px) {
+  .results-list th, .results-list td {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+}

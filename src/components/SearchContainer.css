@@ -1,37 +1,97 @@
-.search-bar-container {
+.search-bar {
     display: grid;
+    grid-template-columns: 6fr 6fr;
+    grid-gap: 2vw;
+  }
+.container1 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.container1 > input:nth-child(4),
+.container1 > input:nth-child(5) {
+  grid-column: span 2; 
+}
+
+.container1 > input:nth-child(6) {
+  grid-column: span 3; 
+}
+
+
+.container2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.container2 > input:nth-child(1) {
+  grid-column: span 3; 
+}
+
+
+.search-bar input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 11px;
+  font-size: 0.9rem;
+  min-width: 150px; 
+}
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  min-width: 150px; 
+}
+option{
+  font-size: 0.9rem;
+}
+    
+.search-bar button {
+  width: 5vw;
+  background-color: #ffffff;
+  color: #007bff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  @media (max-width: 1024px) {
+    width: 9vw;
+  }
+}
+    
+.search-bar button:hover {
+  background-color: #E5E3D4;
+}
+
+@media (max-width: 1024px) { /* For tablets */
+  .search-bar {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  .container1, .container2 {
     grid-template-columns: 1fr 1fr;
-    grid-gap: 26vw;
   }
-  .container1 {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-      justify-content: space-between;
+
+  .container1 > input:nth-child(4),
+  .container1 > input:nth-child(5),
+  .container1 > input:nth-child(6),
+  .container2 > input:nth-child(1) {
+    grid-column: span 1; 
   }
-  .container2 {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-      justify-content: space-between;
+}
+
+@media (max-width: 768px) { /* For mobile */
+  .search-bar {
+    grid-template-columns: 1fr; 
+    gap: 2vw;
   }
-  .search-bar-container input {
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      flex: 1 1 200px;
-    }
-    
-    .search-bar-container button {
-      padding: 8px 16px;
-      background-color: #ffffff;
-      color: #007bff;
-      border: 1px solid #000;
-      cursor: pointer;
-    }
-    
-    .search-bar-container button:hover {
-      background-color: #0056b3;
-    }
+  .search-bar button {
+    width: 22vw;
+  }
+  .container1, .container2 {
+    grid-template-columns: 1fr; 
+  }
+}
