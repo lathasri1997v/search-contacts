@@ -12,38 +12,61 @@ function App() {
   const [searchInitiated, setsearchInitiated] = useState(false); // Correct state variable
   const resultsPerPage = 2;
 
-  const handleSearch = (filters) => {
-    const keyMap = {
-        firstName: "first_name",
-        lastName: "last_name",
-        dob: "dob",
-        email: "email",
-        phone: "phone",
-        streetAddress: "streetAddress",
-        city: "city",
-        state: "state",
-        zipCode: "zipCode",
-    };
+const handleSearch = (filters) => {
+  const keyMap = {
+    firstName: "first_name",
+    lastName: "last_name",
+    dob: "dob",
+    email: "email",
+    phone: "phone",
+    streetAddress: "streetAddress",
+    city: "city",
+    state: "state",
+    zipCode: "zipCode",
+  };
 
-    // Validation: Check if the required field 'lastName' is empty
-    if (!filters.lastName || filters.lastName.trim() === "") {
-        setResults([]); // 
-        setsearchInitiated(true); //
-        return;
-    }
+  // Checking if all input fields are empty
+  const checkFieldEmpty = Object.values(filters).every(
+    (value) => !value || value.trim() === ""
+  );
 
-    const filteredContacts = contacts.filter((contact) =>
-        Object.keys(filters).every((key) => {
-            const contactKey = keyMap[key];
-            const filterValue = filters[key]?.toString().toLowerCase().trim();
-            const contactValue = contact[contactKey]?.toString().toLowerCase().trim();
-            // Only match if the filterValue exists and matches the contactValue
-            return !filterValue || (contactValue && contactValue.includes(filterValue));
-        })
+  // Then if  all fields are empty
+  if (checkFieldEmpty) {
+    setResults([]); // Clear previous results
+    setsearchInitiated(true);
+    return;
+  }
+
+  // Checking if 'lastName' is empty but other fields are filled
+  if (!filters.lastName || filters.lastName.trim() === "") {
+    // Check if any other field is filled
+    const otherFieldsFilled = Object.keys(filters).some(
+      (key) =>
+        key !== "lastName" &&
+        filters[key] &&
+        filters[key].toString().trim() !== ""
     );
 
-    setResults(filteredContacts);
-    setsearchInitiated(true); 
+    if (otherFieldsFilled) {
+      alert("Please enter the Last Name");
+      setResults([]);
+      setsearchInitiated(false);
+      return;
+    }
+  }
+
+  // Filtering contacts
+  const filteredContacts = contacts.filter((contact) =>
+    Object.keys(filters).every((key) => {
+      const contactKey = keyMap[key];
+      const filterValue = filters[key]?.toString().toLowerCase().trim();
+      const contactValue = contact[contactKey]?.toString().toLowerCase().trim();
+      return !filterValue || (contactValue && contactValue.includes(filterValue));
+    })
+  );
+
+  setResults(filteredContacts);
+  setsearchInitiated(true);
 };
 
   const indexOfLastResult = currentPage * resultsPerPage;

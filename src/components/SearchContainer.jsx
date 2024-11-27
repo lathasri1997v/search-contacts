@@ -20,10 +20,6 @@ export const SearchContainer = ({ onSearch }) => {
     
       const handleSearchClick = () => {
         onSearch(filters);
-        if (!filters.lastName.trim()) {
-            alert("Last Name is required.");
-            return;
-          }
       };
     
       return (

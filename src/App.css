@@ -7,26 +7,22 @@
 }
 
 .search-bar-container {
-  width: 75%; /* Default for desktop */
+  width: 75%;
   max-width: 1200px;
   margin: auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
-  .selected-contact {
-    border-radius: 3px;
-  }
 }
 
 @media (max-width: 1024px) {
   .search-bar-container {
-    width: 90%; /* Adjust width for tablets */
+    width: 90%; 
   }
 }
 
 @media (max-width: 768px) {
   .search-bar-container {
-    width: 95%; /* Adjust width for mobile */
+    width: 95%; 
   }
 }
